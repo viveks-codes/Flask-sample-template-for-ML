@@ -1,25 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Flask ML App</title>
+    <meta charset="UTF-8">
+    <title>Flask ML App</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
 </head>
 <body>
-<h1>Flask ML App</h1>
-<form action="{{ url_for('predict') }}" method="post">
-<label for="sepal length">Sepal Length</label>
-<input type="text" name="sepal length" id="sepal length">
-<label for="sepal width">Sepal Width</label>
-<input type="text" name="sepal width" id="sepal width">
-<label for="petal length">Petal Length</label>
-<input type="text" name="petal length" id="petal length">
-<label for="petal width">Petal Width</label>
-<input type="text" name="petal width" id="petal width">
-<button type="submit">Predict</button>
- 
-</form>
-<h2>{{ prediction_text }}</h2>
+    <div id="container">
+        <img src="{{ url_for('static', filename='3.jpg') }}" alt="Medical Icon" id="medical-icon">
+        <h1>Health Lens AI</h1>
 
+        <form action="{{ url_for('predict') }}" method="post" enctype="multipart/form-data">
+            <h2>Upload medicine image for diagnosis</h2>
+            <input type="file" name="image" accept="image/*">
+            <button type="submit">Submit</button>
+        </form>
+
+        <div id="search-container">
+            <form action="{{ url_for('search') }}" method="post">
+                <h2>Search for medicines</h2>
+                <div class="search-input">
+                    <input type="text" name="search_query" placeholder="Enter medicine name">
+                    <span id="search-icon">🔍</span>
+                </div>
+
+            </form>
+        </div>
+
+        
+    </div>
+<h2>{{ prediction_text }}</h2>
 </body>
- 
 </html>
