@@ -1,0 +1,98 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: url("{{ url_for('static', filename='2.jpg') }}") center/cover fixed;
+    font-family: 'Roboto', sans-serif;
+    color: rgb(19, 18, 18);
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#container {
+    max-width: 500px;
+    width: 90%;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+form {
+    margin: 20px 0;
+}
+
+input[type="file"], input[type="text"] {
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #007BFF;
+    border-radius: 5px;
+    background-color: transparent;
+    color: #007BFF;
+}
+
+button[type="submit"] {
+    margin-top: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 12px 40px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    animation: pulse 2s infinite;
+}
+
+#search-container {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column; /* Place search bar in a column layout */
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+}
+
+.search-input {
+    width: 100%; /* Make the search bar occupy the full width */
+    max-width: 500px; /* Set a maximum width for the search bar */
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+#search-bar {
+    width: 100%;
+    padding: 15px; /* Increase the padding for larger size */
+    border: 2px solid #007BFF;
+    border-radius: 5px;
+    background-color: transparent;
+    color: #007BFF;
+    padding-right: 40px; /* Make space for the search icon */
+}
+
+#search-icon {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+}
+
+#medical-icon {
+    max-width: 200px; /* Set a maximum width in pixels */
+    max-height: 200px; /* Set a maximum height in pixels */
+    border-radius: 20%; /* Make it circular (assuming it's a circular icon) */
+    margin-bottom: 1em; /* Add space below the image */
+}
+
