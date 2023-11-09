@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Lens AI</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+    <style>
+        /* Add your custom CSS styles here */
+        .chat-section {
+            display: flex;
+            flex-direction: column;
+            max-width: 80%;
+            margin: auto;
+        }
+
+        .message {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 10px;
+        }
+
+        .user {
+            background-color: #e6f7ff;
+            align-self: flex-end;
+        }
+
+        .bot {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <header>
+            <img src="{{ url_for('static', filename='3.jpg') }}" alt="Medical Icon" id="medical-icon">
+            <h1>Health Lens AI</h1>
+        </header>
+
+        <main>
+            <section class="chat-section">
+                <h2>Chat with Health Lens AI</h2>
+                <div id="chat-container">
+                    <!-- Chat conversation goes here -->
+                </div>
+                <form id="chat-form">
+                    <input type="text" id="user-message" placeholder="Type your message...">
+                    <button type="submit">Send</button>
+                </form>
+            </section>
+        </main>
+    </div>
+    <script>
+        const chatContainer = document.querySelector('#chat-container');
+        const chatForm = document.querySelector('#chat-form');
+        const userMessageInput = document.querySelector('#user-message');
+    
+        chatForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const userMessage = userMessageInput.value;
+    appendMessage('user', userMessage);
+
+    // Send user message to the server for processing
+    const response = await fetch('/chatbot', {
+        method: 'POST',
+        body: JSON.stringify({ user_message: userMessage }),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    });
+    const data = await response.json();
+    const botResponse = data.bot_response;
+    appendMessage('bot', botResponse);
+
+    // Clear the user input immediately after pressing "Send"
+    userMessageInput.value = '';
+});
+
+function appendMessage(sender, message) {
+    const messageElement = document.createElement('div');
+    messageElement.classList.add(sender, 'message');
+    messageElement.innerText = message;
+    chatContainer.appendChild(messageElement);
+}
+
+    </script>
+    
+</body>
+</html>

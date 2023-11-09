@@ -2,18 +2,154 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Flask ML App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Lens AI</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+    <style>
+        h3.benefit {
+    font-size: 18px; /* Adjust the font size as needed */
+    margin: 10px 0; /* Adjust the margins as needed */
+    color: #666; /* Set the desired text color */
+    /* align text left  */
+    text-align: left;
+    /* adjust */
+    align-self: stretch;
+    flex-grow: 1;
+
+
+}
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        #container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+       
+        h1 {
+            font-size: 24px;
+            margin: 20px 0;
+            color: #333;
+        }
+
+        h3 {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #666;
+        }
+
+        a.button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        a.button:hover {
+            background-color: #0056b3;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        h2 {
+            font-size: 20px;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        label.upload-button {
+            display: block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        label.upload-button:hover {
+            background-color: #0056b3;
+        }
+
+        button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .search-input {
+            display: flex;
+            align-items: center;
+        }
+
+        input[name="search_query"] {
+            padding: 10px;
+            border: 1px solid #007bff;
+            border-radius: 5px 0 0 5px;
+            /* adjust */
+            align-self: stretch;
+            flex-grow: 1;
+            
+        }
+
+        #search-icon {
+            text-decoration: none;
+            
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            
+        }
+
+        #search-icon:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
     <div id="container">
         <img src="{{ url_for('static', filename='3.jpg') }}" alt="Medical Icon" id="medical-icon">
-        <h1>Health Lens AI</h1>
+        <h3 class="benefit"> + Diagnose your medicines</h3>
+<h3 class="benefit"> + Upload an image of your medicine to diagnose it</h3>
+<h3 class="benefit"> + Search for medicines</h3>
+<h3 class="benefit"> + Get information about medicines</h3>
+<h3 class="benefit"> + Talk to our chatbot</h3>
 
+        <h1 >
+            <a href="{{ url_for('chat') }}" class="button">Click here to talk to our chatbot</a>
+        </h1>
         <form action="{{ url_for('predict') }}" method="post" enctype="multipart/form-data">
             <h2>Upload medicine image for diagnosis</h2>
-            <input type="file" name="image" accept="image/*">
+            <label for="image" class="upload-button">Choose File</label>
+            <input type="file" id="image" name="image" accept="image/*">
             <button type="submit">Submit</button>
         </form>
 
@@ -22,14 +158,17 @@
                 <h2>Search for medicines</h2>
                 <div class="search-input">
                     <input type="text" name="search_query" placeholder="Enter medicine name">
-                    <span id="search-icon">🔍</span>
+                    <br>
+                    <br>
+                    <div>
+                        <button type="submit" id="search">Search</button>
+                    </div>
+                    <br>
+                    <br>
                 </div>
-
             </form>
         </div>
-
-        
     </div>
-<h2>{{ prediction_text }}</h2>
+    <h2>{{ prediction_text }}</h2>
 </body>
 </html>
