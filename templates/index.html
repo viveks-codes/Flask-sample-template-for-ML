@@ -149,10 +149,41 @@
         <form action="{{ url_for('predict') }}" method="post" enctype="multipart/form-data">
             <h2>Upload medicine image for diagnosis</h2>
             <label for="image" class="upload-button">Choose File</label>
-            <input type="file" id="image" name="image" accept="image/*">
+            <input type="file" id="image" name="image" accept="image/*" onchange="displayFileName()">
+            <span id="error-message" class="error-message"></span>
+            <p id="selected-file"></p>
             <button type="submit">Submit</button>
+            
         </form>
-
+        <script>
+            function validateForm() {
+                var fileInput = document.getElementById('image');
+                var errorMessage = document.getElementById('error-message');
+                
+                // Check if a file is selected
+                if (fileInput.files.length === 0) {
+                    errorMessage.textContent = 'Please choose a file.';
+                    return false;
+                }
+    
+                // Reset error message
+                errorMessage.textContent = '';
+    
+                // Form is valid, allow submission
+                return true;
+            }
+    
+            function displayFileName() {
+                var fileInput = document.getElementById('image');
+                var selectedFileText = document.getElementById('selected-file');
+    
+                if (fileInput.files.length > 0) {
+                    selectedFileText.textContent = 'Selected File: ' + fileInput.files[0].name;
+                } else {
+                    selectedFileText.textContent = '';
+                }
+            }
+        </script>
         <div id="search-container">
             <form action="{{ url_for('search') }}" method="post">
                 <h2>Search for medicines</h2>
